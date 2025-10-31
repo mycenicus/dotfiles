@@ -1,0 +1,5 @@
+[Unit]
+Description=Battery low notification
+
+[Service]
+ExecStart=%h/.config/hypr/scripts/battery_low.sh

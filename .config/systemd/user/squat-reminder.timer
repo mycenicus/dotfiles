@@ -1,0 +1,10 @@
+[Unit]
+Description=Timer to remind about squats every 45 minutes
+
+[Timer]
+OnBootSec=45min
+OnUnitActiveSec=45min
+Unit=squat-reminder.service
+
+[Install]
+WantedBy=timers.target
