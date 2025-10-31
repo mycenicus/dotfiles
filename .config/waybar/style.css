@@ -1,0 +1,308 @@
+@import "colors.css";
+
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: "JetBrainsMono Nerd Font Propo", FontAwesome, Roboto;
+    font-weight: bold;
+    min-height: 0;
+    font-size: 98%;
+    border-radius: 10px;
+    font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+}
+
+#window {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0 10px;
+}
+
+window#waybar,
+window#waybar.empty,
+window#waybar.empty #window {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+tooltip {
+    color: @inverse_surface;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+}
+
+tooltip label {
+    color: @inverse_surface;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+.modules-right {
+    color: @secondary;
+    padding: 2px 4px;
+}
+.modules-center {
+    color: @secondary;
+    padding: 2px 4px;
+}
+.modules-left {
+    color: @secondary;
+    padding: 1px 0px;
+}
+
+#taskbar button,
+#workspaces button {
+    color: @outline;
+    box-shadow: none;
+    text-shadow: none;
+    padding: 0 5px;
+    border-radius: 9px;
+}
+#taskbar button:hover,
+#workspaces button:hover {
+    color: @primary;
+    transition: all 0.3s ease-in-out;
+}
+
+#taskbar button.active,
+#workspaces button.active {
+	color: @background;
+	background-color: alpha(@primary_fixed, 0.75);
+	padding: 0 8px;
+	transition: all 0.1s ease-in-out;
+}
+
+#workspaces button.urgent {
+	color: @primary;
+	border-radius: 10px;
+}
+
+#workspaces button.persistent{
+    border-radius: 10px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock,
+#battery,
+#mpris,
+#taskbar,
+#power-profiles-daemon {
+    padding: 4px 12px;
+    margin: 0 4px;
+}
+
+#clock,
+#workspaces {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#notify {
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 0 4px;
+    padding-left:  12px;
+    padding-right: 6px;
+}
+
+#miscellaneous {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#battery {
+    margin-left: 1px;
+}
+
+#custom-power {
+    padding: 4px 7px;
+    margin: 0 4px;
+}
+
+#network {
+    padding: 0px;
+    margin-right: 4px;
+}
+
+#pulseaudio {
+    padding: 4px;
+    margin: 0 4px;
+}
+
+#pulseaudio.muted {
+    color: #cc3436;
+}
+
+#battery.charging, #battery.plugged {
+    color: #ffffff;
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        color: #000000;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#power-profiles-daemon.performance {
+    background-color: #f53c3c;
+    color: #ffffff;
+}
+
+#power-profiles-daemon.balanced {
+    background-color: #2980b9;
+    color: #ffffff;
+}
+
+#power-profiles-daemon.power-saver {
+    background-color: #2ecc71;
+    color: #000000;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#network.disconnected {
+    background-color: #f53c3c;
+}
+
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+}
+#custom-media.custom-spotify {
+    background-color: #66cc99;
+}
+#custom-media.custom-vlc {
+    background-color: #ffa000;
+}
+
+#temperature {
+    background-color: #f0932b;
+}
+#temperature.critical {
+    background-color: #eb4d4b;
+}
+
+#tray {
+    background-color: #2980b9;
+}
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+#idle_inhibitor {
+    background-color: #2d3436;
+}
+#idle_inhibitor.activated {
+    background-color: #ecf0f1;
+    color: #2d3436;
+}
+
+#language {
+    background: #00b093;
+    color: #740864;
+    padding: 0 5px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state {
+    background: #97e1ad;
+    color: #000000;
+    padding: 0 0px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
+
+#privacy {
+    padding: 0;
+}
+
+#privacy-item {
+    padding: 0 5px;
+    color: white;
+}
+
+#privacy-item.screenshare {
+    background-color: #cf5700;
+}
+
+#privacy-item.audio-in {
+    background-color: #1ca000;
+}
+
+#privacy-item.audio-out {
+    background-color: #0069d4;
+}
+#pulseaudio-slider {
+    padding: 0;
+    margin: 0;
+}
+#pulseaudio-slider slider {
+    min-height: 0px;
+    min-width: 0px;
+    opacity: 0;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+#pulseaudio-slider trough {
+    min-height: 10px;
+    min-width: 80px;
+    border-radius: 5px;
+    background-color: black;
+}
+#pulseaudio-slider highlight {
+    min-width: 10px;
+    border-radius: 5px;
+    background-color: green;
+}
