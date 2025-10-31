@@ -1,0 +1,6 @@
+[Unit]
+Description=Reminder to do squats
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/notify-send -i "${HOME}/.config/swaync/icons/squats.png" "🏋️ Time for 10 squats!" "Stand up and do your set 💪"
