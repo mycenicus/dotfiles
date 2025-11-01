@@ -105,6 +105,8 @@ if ! command -v yay &>/dev/null; then
    cd yay
    makepkg -si --noconfirm
    cd - && sudo rm -r ./yay/
+else
+   echo "yay is already installed -- skipping"
 fi
 
 step "Installing yay packages"
@@ -131,7 +133,7 @@ if [[ "${STOW}" == false ]]; then
    cp -rf .config/* "${HOME}/.config/"
    cp -rf .icons/* "${HOME}"
 else
-   echo "Skipping dotfiles copy."
+   step "Skipping dotfiles copy."
 fi
 
 step "Setting GTK theme"
@@ -142,8 +144,8 @@ gsettings set org.gnome.desktop.interface icon-theme "Papirus"
 echo "Setting Umbrella cursor"
 gsettings set org.gnome.desktop.interface cursor-theme "umbrella"
 echo "Setting font antialiasing"
-gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "rgba"
-gsettings set org.gnome.settings-daemon.plugins.xsettings hinting "slight"
+gsettings set org.gnome.desktop.interface font-antialiasing rgba
+gsettings set org.gnome.desktop.interface font-hinting slight
 
 step "Setting Zsh as default shell"
 sudo chsh -s "$(which zsh)" "$USER"
@@ -166,6 +168,7 @@ echo -e "\e[1mNow install your wallpaper and then run:\e[0m"
 echo -e "\n    \e[1;36m matugen image <PATH-TO-WALLPAPER>\e[0m"
 echo -e "\nThis will generate and apply your theme based on the wallpaper."
 echo -e "Set your wallpaper in hyprpaper \033[1;34m(~/.config/hypr/hyprpaper.conf)\033[0m"
+echo -e "And in hyprlock \033[1;34m(~/.config/hypr/hyprlock.conf)\033[0m"
 
 if [[ "${STOW}" == true ]]; then
    echo -e "Run \e[1;36mstow -t ~ .\e[0m to create symlinks"
