@@ -3,7 +3,7 @@
 set -e
 
 # Make sure script is not run as sudo
-if [ "$EUID" -eq 0]; then
+if [ "$EUID" -eq 0 ]; then
    echo "Run as normal user, not with sudo."
    exit 1
 fi
@@ -15,7 +15,8 @@ show_help() {
     echo "  --misc      Install miscellaneous programs (firefox, mpv, image viewer etc.)"
     echo "  --battery   Enable low battery notification"
     echo "  --squat     Enable squat reminder"
-    echo "  --all       Include all options"
+    echo "  --all       Include --misc, --battery, --squat"
+    echo "  --stow      Add stow support (doesn't copy dotfiles to ~)"
     echo "  -h, --help  Show this help message"
     exit 0
 }
@@ -23,6 +24,7 @@ show_help() {
 INSTALL_MISC=false
 ENABLE_BATTERY=false
 ENABLE_SQUAT=false
+STOW=false
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -35,6 +37,7 @@ while [[ $# -gt 0 ]]; do
             ENABLE_BATTERY=true
             ENABLE_SQUAT=true
             ;;
+        --stow) STOW=true ;;
         -h|--help) show_help ;;
         *)
             echo "Unknown option: $1"
@@ -120,12 +123,16 @@ else
   echo "${HOME}/.zgen already exists -- skipping"
 fi
 
-step "Copying dotfiles"
-mkdir -p "${HOME}/.config"
-cp -rf .vimrc "${HOME}/"
-cp -rf .zshrc "${HOME}/"
-cp -rf .config/* "${HOME}/.config/"
-cp -rf .icons/* "${HOME}"
+if [[ "${STOW}" == false ]]; then
+   step "Copying dotfiles"
+   mkdir -p "${HOME}/.config"
+   cp -rf .vimrc "${HOME}/"
+   cp -rf .zshrc "${HOME}/"
+   cp -rf .config/* "${HOME}/.config/"
+   cp -rf .icons/* "${HOME}"
+else
+   echo "Skipping dotfiles copy."
+fi
 
 step "Setting GTK theme"
 echo "Setting Materia GTK theme"
@@ -159,3 +166,7 @@ echo -e "\e[1mNow install your wallpaper and then run:\e[0m"
 echo -e "\n    \e[1;36m matugen image <PATH-TO-WALLPAPER>\e[0m"
 echo -e "\nThis will generate and apply your theme based on the wallpaper."
 echo -e "Set your wallpaper in hyprpaper \033[1;34m(~/.config/hypr/hyprpaper.conf)\033[0m"
+
+if [[ "${STOW}" == true ]]; then
+   echo -e "Run \e[1;36mstow -t ~ .\e[0m to create symlinks"
+fi
