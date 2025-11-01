@@ -22,14 +22,18 @@ sudo pacman -Syyu --noconfirm
 step "Installing system packages"
 sudo pacman -S --needed --noconfirm \
    adwaita-fonts \
+   otf-font-awesome \
    ttf-cascadia-mono-nerd \
    ttf-jetbrains-mono-nerd \
    noto-fonts-emoji \
+   papirus-icon-theme \
+   materia-gtk-theme \
    wl-clipboard \
    libnotify \
    power-profiles-daemon \
    brightnessctl \
    pamixer \
+   pavucontrol \
    playerctl \
    blueman \
    networkmanager \
@@ -37,10 +41,15 @@ sudo pacman -S --needed --noconfirm \
    hyprlock \
    hyprpolkitagent \
    hypridle \
+   hyprpaper \
    swaync \
    waybar \
    rofi \
    nautilus \
+   file-roller \
+   loupe \
+   evince \
+   mpv \
    zsh \
    git \
    fzf
@@ -54,7 +63,7 @@ if ! command -v yay &>/dev/null; then
    cd - && sudo rm -r ./yay/
 fi
 
-step "Installing yay (AUR helper)"
+step "Installing yay packages"
 yay -S --noconfirm --needed \
    matugen-bin \
    wlogout
@@ -75,16 +84,31 @@ mkdir -p "${HOME}/.config"
 cp -rf .vimrc "${HOME}/"
 cp -rf .zshrc "${HOME}/"
 cp -rf .config/* "${HOME}/.config/"
+cp -rf .icons/* "${HOME}"
+
+step "Setting GTK theme"
+echo "Setting Materia GTK theme"
+gsettings set org.gnome.desktop.interface gtk-theme "Materia-light-compact"
+echo "Setting Papirus icon theme"
+gsettings set org.gnome.desktop.interface icon-theme "Papirus"
+echo "Setting Umbrella cursor"
+gsettings set org.gnome.desktop.interface cursor-theme "umbrella"
+echo "Setting font antialiasing"
+gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "rgba"
+gsettings set org.gnome.settings-daemon.plugins.xsettings hinting "slight"
 
 step "Setting Zsh as default shell"
 sudo chsh -s "$(which zsh)" "$USER"
 
 step "Enabling timers"
 systemctl --user daemon-reload
+echo "Enabling low battery notifier"
 systemctl --user enable --now .config/systemd/user/battery-notify.timer
+echo "Enabling squat reminder"
 systemctl --user enable --now .config/systemd/user/squat-reminder.timer
 
 echo -e "\n✅ \033[1;32mInstallation complete!\033[0m"
 echo -e "\e[1mNow install your wallpaper and then run:\e[0m"
-echo -e "\n    \e[1;36mmatugen image <PATH-TO-WALLPAPER>\e[0m"
-echo -e "\nThis will generate and apply your theme based on the wallpaper."
+echo -e "\n    \e[1;36m matugen image <PATH-TO-WALLPAPER>\e[0m"
+echo    "\nThis will generate and apply your theme based on the wallpaper."
+echo -e "Set your wallpaper in hyprpaper \033[1;34m(~/.config/hypr/hyprpaper.conf)\033[0m"
