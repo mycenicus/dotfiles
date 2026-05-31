@@ -87,7 +87,9 @@ sudo pacman -S --needed --noconfirm \
    nautilus \
    zsh \
    git \
-   fzf
+   fzf \
+   tmux \
+   lazygit
 
 if [[ "$INSTALL_MISC" == true ]]; then
    sudo pacman -S --needed --noconfirm \

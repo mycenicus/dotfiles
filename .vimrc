@@ -1,6 +1,36 @@
 " Stop vim from pretending it's vi
 set nocompatible
 
+" Vunde plug-in manager
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'christoomey/vim-tmux-navigator'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" PLugin Options
+" vim-tmux-navigator
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-h> :<C-U>TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :<C-U>TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :<C-U>TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :<C-U>TmuxNavigateRight<cr>
+" Auto-save after switching pane
+" 1-only current 2-all buffers
+" let g:tmux_navigator_save_on_switch = 1
+" Disable tmux navigator when zooming the Vim pane
+" let g:tmux_navigator_disable_when_zoomed = 1
+" If the tmux window is zoomed, keep it zoomed when moving from Vim to another pane
+" let g:tmux_navigator_preserve_zoom = 1
+
 " Basic settings
 set number
 set relativenumber
