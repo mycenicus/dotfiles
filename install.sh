@@ -127,6 +127,20 @@ else
   echo "${HOME}/.zgen already exists -- skipping"
 fi
 
+step "Installing Vundle"
+if [ ! -d "${HOME}/.vim/bundle/Vundle.vim" ]; then
+   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+else
+  echo "Vundle is already installed"
+fi
+
+step "Installing tmux plugin manager (tpm)"
+if [ ! -d "${HOME}/.tmux/plugins/tpm" ]; then
+   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+else
+  echo "tpm is already installed"
+fi
+
 if [[ "${STOW}" == false ]]; then
    step "Copying dotfiles"
    mkdir -p "${HOME}/.config"
