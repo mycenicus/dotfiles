@@ -1,2 +1,5 @@
 .config/systemd/user/timers.target.wants/
 .config/tmux/plugins/
+.vim/bundle/
+.vim/.netrwbook
+.vim/.netrwhist
