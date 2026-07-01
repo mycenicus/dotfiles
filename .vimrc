@@ -76,9 +76,9 @@ set hlsearch
 set incsearch
 
 " Store global marks after exiting
-" set viminfo+=f1
-" Remember 100 commands after exiting
-" set viminfo+=:100
+set viminfo+=f1
+" Remember 50 commands after exiting
+set viminfo+=:50
 
 " INSERT Mode maps
 " Allows to undo the <C-U> undo
@@ -86,15 +86,19 @@ inoremap <C-U> <C-G>u<C-U>
 
 " NORMAL Mode maps
 " Yank into "+ buffer
-nnoremap <Y> "+y
+nnoremap Y "+y
 " Paste but keep cursor' column. Useful when multiline editing
 nnoremap gp m`p``j
 " Do formatting with motion
 nnoremap Q gq
+" Open a file under the cursor in a vertical split
+nnoremap gF <C-W>v<C-W>wgf
 
 " VISUAL Mode maps
 " Yank visually selected text and search it in .c files (from usr_05.txt)
 vnoremap _g y:exe "grep /" . escape(@", '\\/') . "/ *.c *.h"<CR>
+" Yank into "+ buffer
+vnoremap Y "+y
 
 " Enable syntax and plugins
 syntax enable
