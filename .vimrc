@@ -57,7 +57,9 @@ set linebreak
 set breakindent
 set textwidth=80
 " Sets autoindent for source code files
-set cindent shiftwidth=3
+set shiftwidth=3
+set autoindent
+set smartindent
 
 " Do not recognize numbers starting with a zero as octal
 " For some reason is not a default
