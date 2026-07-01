@@ -87,6 +87,8 @@ inoremap <C-U> <C-G>u<C-U>
 " NORMAL Mode maps
 " Yank into "+ buffer
 nnoremap <Y> "+y
+" Paste but keep cursor' column. Useful when multiline editing
+nnoremap gp m`p``j
 " Do formatting with motion
 nnoremap Q gq
 
@@ -145,12 +147,10 @@ let g:netrw_keepdir=0
 " When opening netrw make window smaller (30%)
 let g:netrw_winsize=30
 let g:netrw_banner=0
-" Hide dotfiles on load
+" Hide dotfiles on load. Change it with gh
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 " Allows copying dirs without using mx
 let g:netrw_localcopydircmd='cp -r'
-" Highlight marked files in the same way search does
-" hi! link netrwMarkFile Search
 " tree view
 let g:nertrw_liststyle=3
 
