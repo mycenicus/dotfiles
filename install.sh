@@ -88,6 +88,7 @@ sudo pacman -S --needed --noconfirm \
    zsh \
    git \
    fzf \
+   ripgrep \
    tmux \
    lazygit
 

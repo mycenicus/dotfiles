@@ -77,6 +77,9 @@ set hlsearch
 " HL matches while you are still typing
 set incsearch
 
+" Show title for window
+set title
+
 " Store global marks after exiting
 set viminfo+=f1
 " Remember 50 commands after exiting
@@ -95,12 +98,35 @@ nnoremap gp m`p``j
 nnoremap Q gq
 " Open a file under the cursor in a vertical split
 nnoremap gF <C-W>v<C-W>wgf
+" Better way to navigate through various buffers
+nnoremap ]a :next<CR>
+nnoremap [a :prev<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprev<CR>
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprev<CR>
+" Add empty space above and below cursor
+nnoremap ]<Space> o<Esc>
+nnoremap [<Space> O<Esc>
+
+let mapleader = " "
+" List all buffers available
+nnoremap <leader>b :b <C-d>
+" Load buffers from current dir recursively. Isn't executed automatically to
+" allow to add extensions at the end: .c for example
+" nnoremap <leader>lb :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
+nnoremap <leader>lb :argadd **/*<C-d>
+" If it didn't load buffers from hidden directories, you can fallback to ripgrep
+nnoremap <leader>lr :call LoadBuffersFromRG()<CR>
 
 " VISUAL Mode maps
 " Yank visually selected text and search it in .c files (from usr_05.txt)
 vnoremap _g y:exe "grep /" . escape(@", '\\/') . "/ *.c *.h"<CR>
 " Yank into "+ buffer
 vnoremap Y "+y
+
+" COMMAND Mode maps
+cnoremap <expr> %% fnameescape(expand('%:p'))
 
 " Enable syntax and plugins
 syntax enable
@@ -126,12 +152,8 @@ hi StatusLine ctermfg=Darkgray ctermbg=White
 set background=dark
 set t_Co=256
 
-" From usr_05.txt
-" After opening a file jump to '" mark if it exists
-autocmd BufReadPost *
-   \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-   \ | exe "normal! g`\""
-   \ | endif
+" Open netrw when no file is specified
+autocmd VimEnter * if argc() == 0 | Explore | endif
 " Removes making a new line a comment if the previous line is a comment
 augroup NoAutoComment
    autocmd!
@@ -142,9 +164,28 @@ augroup ActiveCursorline
     autocmd!
     autocmd WinEnter,BufWinEnter * setlocal cursorline
 augroup END
+" From usr_05.txt
+" After opening a file jump to '" mark if it exists
+autocmd BufReadPost *
+   \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+   \ | exe "normal! g`\""
+   \ | endif
 " Create :DiffOrig command that allows you to show difference between current
 " version of the file and original (when you just opened it)
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
+
+" A function that allows to load buffers using ripgrep if :argdo **/* doesn't work the intended way
+function! LoadBuffersFromRG()
+  let cmd = input('Load buffers (rgrep): ', "rg --files --hidden -g '!.git/*'")
+
+  let files = split(system(cmd), "\n")
+
+  for f in files
+    if !empty(f)
+      execute 'badd' fnameescape(f)
+    endif
+  endfor
+endfunction
 
 " Netrw settings. Can be opened via :Explore, with a prefixes :H, :V, :T
 " Use mf, mt, mx commands if you want to interact with the files
@@ -160,8 +201,15 @@ let g:netrw_localcopydircmd='cp -r'
 " tree view
 let g:nertrw_liststyle=3
 
+" Show at most 5 matches
 set complete=.^5,w^5,b^5,u^5,t^5,i^5
 set autocomplete
+" Add popup menu for command completion
+set wildoptions+=pum
+" Add partial matching for path completion (for :e)
+set wildmode+=longest:full
+set wildignorecase
+set wildignore=\*.git/\*
 " Enable omnicomplete
 set omnifunc=syntaxcomplete#Complete
 
