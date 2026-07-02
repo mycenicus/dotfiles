@@ -34,7 +34,6 @@ nnoremap <silent> <C-l> :<C-U>TmuxNavigateRight<cr>
 " If the tmux window is zoomed, keep it zoomed when moving from Vim to another pane
 " let g:tmux_navigator_preserve_zoom = 1
 
-
 " Basic settings
 set number
 set relativenumber
@@ -106,8 +105,8 @@ nnoremap [q :cprev<CR>
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
 " Add empty space above and below cursor
-nnoremap ]<Space> o<Esc>
-nnoremap [<Space> O<Esc>
+nnoremap ]<Space> m`o<Esc>``
+nnoremap [<Space> m`O<Esc>``
 
 let mapleader = " "
 " List all buffers available
@@ -120,8 +119,8 @@ nnoremap <leader>lb :argadd **/*<C-d>
 nnoremap <leader>lr :call LoadBuffersFromRG()<CR>
 
 " VISUAL Mode maps
-" Yank visually selected text and search it in .c files (from usr_05.txt)
-vnoremap _g y:exe "grep /" . escape(@", '\\/') . "/ *.c *.h"<CR>
+" Yank visually selected text and search it in specified files (modified, from usr_05.txt)
+vnoremap _g y:call GrepVisualYank()<CR>
 " Yank into "+ buffer
 vnoremap Y "+y
 
@@ -185,6 +184,12 @@ function! LoadBuffersFromRG()
       execute 'badd' fnameescape(f)
     endif
   endfor
+endfunction
+
+function! GrepVisualYank()
+    let files = input('Search in files: ', '*.c *.h')
+    execute 'grep /' . escape(@", '\/') . '/ ' . files
+    copen
 endfunction
 
 " Netrw settings. Can be opened via :Explore, with a prefixes :H, :V, :T
