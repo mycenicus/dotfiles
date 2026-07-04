@@ -109,6 +109,8 @@ nnoremap ]<Space> m`o<Esc>``
 nnoremap [<Space> m`O<Esc>``
 
 let mapleader = " "
+" Open netrw
+nnoremap <leader>e :Ex<CR>
 " List all buffers available
 nnoremap <leader>b :b <C-d>
 " Load buffers from current dir recursively. Isn't executed automatically to
@@ -117,12 +119,20 @@ nnoremap <leader>b :b <C-d>
 nnoremap <leader>lb :argadd **/*<C-d>
 " If it didn't load buffers from hidden directories, you can fallback to ripgrep
 nnoremap <leader>lr :call LoadBuffersFromRG()<CR>
+" Delete to black hole register
+nnoremap <leader>d "_d
+
 
 " VISUAL Mode maps
 " Yank visually selected text and search it in specified files (modified, from usr_05.txt)
 vnoremap _g y:call GrepVisualYank()<CR>
 " Yank into "+ buffer
 vnoremap Y "+y
+" Delete to black hole register
+vnoremap <leader>d "_d
+" Keep visual mode when indenting
+vnoremap > >gv
+vnoremap < <gv
 
 " COMMAND Mode maps
 cnoremap <expr> %% fnameescape(expand('%:p'))
