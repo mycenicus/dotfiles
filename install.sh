@@ -104,8 +104,8 @@ fi
 
 step "Installing yay (AUR helper)"
 if ! command -v yay &>/dev/null; then
-   sudo pacman -S --needed --noconfirm git base-devel 
-   git clone https://aur.archlinux.org/yay.git 
+   sudo pacman -S --needed --noconfirm git base-devel
+   git clone https://aur.archlinux.org/yay.git
    cd yay
    makepkg -si --noconfirm
    cd - && sudo rm -r ./yay/
@@ -150,6 +150,7 @@ if [[ "${STOW}" == false ]]; then
    cp -rf .zshrc "${HOME}/"
    cp -rf .config/* "${HOME}/.config/"
    cp -rf .icons/* "${HOME}"
+   cp -rf .vim/* "${HOME}/"
 else
    step "Skipping dotfiles copy."
 fi
