@@ -94,7 +94,7 @@ if &background == 'dark'
   hi Underlined guifg=NONE guibg=NONE guisp=NONE gui=underline ctermfg=NONE ctermbg=NONE cterm=underline term=underline
   hi Statement guifg=#00afff guibg=NONE guisp=NONE gui=NONE ctermfg=39 ctermbg=NONE cterm=NONE term=NONE
   hi String guifg=#00d75f guibg=NONE guisp=NONE gui=NONE ctermfg=41 ctermbg=NONE cterm=NONE term=NONE
-  hi Comment guifg=#767676 guibg=NONE guisp=NONE gui=NONE ctermfg=243 ctermbg=NONE cterm=NONE term=bold
+  hi Comment guifg=#767676 guibg=NONE guisp=NONE gui=NONE ctermfg=244 ctermbg=NONE cterm=NONE term=bold
   hi Conceal guifg=#585858 guibg=NONE guisp=NONE gui=NONE ctermfg=240 ctermbg=NONE cterm=NONE term=NONE
   hi Constant guifg=#ff5f87 guibg=NONE guisp=NONE gui=NONE ctermfg=204 ctermbg=NONE cterm=NONE term=NONE
   hi Identifier guifg=#ff87ff guibg=NONE guisp=NONE gui=NONE ctermfg=213 ctermbg=NONE cterm=NONE term=NONE
