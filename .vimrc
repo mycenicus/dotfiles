@@ -81,8 +81,8 @@ set title
 
 " Store global marks after exiting
 set viminfo+=f1
-" Remember 50 commands after exiting
-set viminfo+=:50
+" Remember 500 commands after exiting
+set viminfo+=:500
 
 " INSERT Mode maps
 " Allows to undo the <C-U> undo
@@ -111,6 +111,7 @@ nnoremap [<Space> m`O<Esc>``
 let mapleader = " "
 " Open netrw
 nnoremap <leader>e :Ex<CR>
+nnoremap <leader>ve :Ve<CR>
 " List all buffers available
 nnoremap <leader>b :b <C-d>
 " Load buffers from current dir recursively. Isn't executed automatically to
@@ -119,15 +120,21 @@ nnoremap <leader>b :b <C-d>
 nnoremap <leader>lb :argadd **/*<C-d>
 " If it didn't load buffers from hidden directories, you can fallback to ripgrep
 nnoremap <leader>lr :call LoadBuffersFromRG()<CR>
+" Change current windows' directory to current file's dir
+nnoremap <silent> <leader>cd :call SetCwd()<CR>
 " Delete to black hole register
 nnoremap <leader>d "_d
-
+" Accidentally found out that pacman's fzf package comes with little plugin that
+" adds :FZF command
+nnoremap <silent> <leader>ff :FZF<CR>
 
 " VISUAL Mode maps
 " Yank visually selected text and search it in specified files (modified, from usr_05.txt)
 vnoremap _g y:call GrepVisualYank()<CR>
 " Yank into "+ buffer
 vnoremap Y "+y
+" Paste from "+ buffer
+vnoremap P "+p
 " Delete to black hole register
 vnoremap <leader>d "_d
 " Keep visual mode when indenting
@@ -185,21 +192,26 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd
 
 " A function that allows to load buffers using ripgrep if :argdo **/* doesn't work the intended way
 function! LoadBuffersFromRG()
-  let cmd = input('Load buffers (rgrep): ', "rg --files --hidden -g '!.git/*'")
+   let cmd = input('Load buffers (rgrep): ', "rg --files --hidden -g '!.git/*'")
 
-  let files = split(system(cmd), "\n")
+   let files = split(system(cmd), "\n")
 
-  for f in files
+   for f in files
     if !empty(f)
       execute 'badd' fnameescape(f)
     endif
-  endfor
+   endfor
 endfunction
 
 function! GrepVisualYank()
-    let files = input('Search in files: ', '*.c *.h')
-    execute 'grep /' . escape(@", '\/') . '/ ' . files
-    copen
+   let files = input('Search in files: ', '*.c *.h')
+   execute 'grep ' . shellescape(@") . ' ' . files
+   copen
+endfunction
+
+function! SetCwd()
+   execute 'lcd' expand('%:p:h')
+   echo 'lcwd: ' . getcwd()
 endfunction
 
 " Netrw settings. Can be opened via :Explore, with a prefixes :H, :V, :T
@@ -214,7 +226,7 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 " Allows copying dirs without using mx
 let g:netrw_localcopydircmd='cp -r'
 " tree view
-let g:nertrw_liststyle=3
+let g:netrw_liststyle=3
 
 " Show at most 5 matches
 set complete=.^5,w^5,b^5,u^5,t^5,i^5
