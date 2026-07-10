@@ -155,6 +155,9 @@ else
    step "Skipping dotfiles copy."
 fi
 
+step "Creating user directories"
+xdg-user-dirs-update
+
 step "Setting GTK theme"
 echo "Setting Materia GTK theme"
 gsettings set org.gnome.desktop.interface gtk-theme "Materia-light-compact"
