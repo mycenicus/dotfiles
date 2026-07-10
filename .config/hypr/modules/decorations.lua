@@ -57,6 +57,7 @@ hl.curve("linear",       { type = "bezier", points = { {0, 0},       {1, 1}     
 
 hl.curve("out",          { type = "bezier", points = { {0.24, 0.9},  {0.25, 0.91} } })
 hl.curve("wind",         { type = "bezier", points = { {0.05, 1},    {0.1, 1.03}  } })
+hl.curve("not-windy",    { type = "bezier", points = { {0.05, 1},    {0.1, 1.01}  } })
 hl.curve("overshot",     { type = "bezier", points = { {0.7, 0.6},   {0.1, 1.1}   } })
 hl.curve("bounce",       { type = "bezier", points = { {1.1, 1.6},   {0.1, 0.85}  } })
 
@@ -71,3 +72,4 @@ hl.animation({ leaf = "windowsMove",   enabled = true,  speed = 7,    bezier = "
 hl.animation({ leaf = "fade",          enabled = true,  speed = 5.2,  bezier = "overshot"                        })
 hl.animation({ leaf = "workspaces",    enabled = true,  speed = 5,    bezier = "wind"                            })
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick"                           })
+hl.animation({ leaf = "layers",        enabled = true,  speed = 5,    bezier = "not-windy"                       })

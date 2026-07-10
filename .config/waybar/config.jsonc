@@ -1,215 +1,215 @@
 // -*- mode: jsonc -*-
 {
-    "layer": "bottom",
-    "height": 30,
-    "margin-top": 3,
-    "margin-bottom": 2,
-    "margin-left": 8,
-    "margin-right": 8,
-    "modules-left": [
-        "clock",
-	"hyprland/workspaces"
-    ],
-    "modules-center": [
-        "hyprland/window"
-    ],
-    "modules-right": [
-	"group/notify",
-	"group/miscellaneous"
-    ],
-    "clock": {
-	"interval": 60,
-	"format": " {:%H:%M}",
-	"format-alt": " {:%H:%M   %Y, %d %B, %A}",
-	"tooltip-format": "<tt><small>{calendar}</small></tt>",
-	"calendar": {
-		"mode": "year",
-		"mode-mon-col": 3,
-		"weeks-pos": "",
-		"on-scroll": 1,
-		"format": {
-			"months": "<span color='#ffead3'><b>{}</b></span>",
-			"days": "<span color='#ecc6d9'><b>{}</b></span>",
-			"weeks": "<span color='#99ffdd'><b>W{}</b></span>",
-			"weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-			"today": "<span color='#ff6699'><b><u>{}</u></b></span>"
-		}
-	}
-    },
-    "battery": {
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "power-profiles-daemon": {
+   "layer": "bottom",
+   "height": 30,
+   "margin-top": 3,
+   "margin-bottom": 2,
+   "margin-left": 8,
+   "margin-right": 8,
+   "modules-left": [
+      "clock",
+      "hyprland/workspaces"
+   ],
+   "modules-center": [
+      "hyprland/window"
+   ],
+   "modules-right": [
+      "group/notify",
+      "group/miscellaneous"
+   ],
+   "clock": {
+      "interval": 60,
+      "format": " {:%H:%M}",
+      "format-alt": " {:%H:%M   %Y, %d %B, %A}",
+      "tooltip-format": "<tt><small>{calendar}</small></tt>",
+      "calendar": {
+         "mode": "year",
+         "mode-mon-col": 3,
+         "weeks-pos": "",
+         "on-scroll": 1,
+         "format": {
+            "months": "<span color='#ffead3'><b>{}</b></span>",
+            "days": "<span color='#ecc6d9'><b>{}</b></span>",
+            "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+            "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+            "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+         }
+      }
+   },
+   "battery": {
+      "states": {
+         // "good": 95,
+         "warning": 30,
+         "critical": 20
+      },
+      "format": "{capacity}% {icon}",
+      "format-full": "{capacity}% {icon}",
+      "format-plugged": "{capacity}% {icon}",
+      "format-alt": "{time} {icon}",
+      "format-icons": {
+         "default": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+         "plugged": ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
+      }
+   },
+   "power-profiles-daemon": {
       "format": "{icon}",
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
       "tooltip": true,
       "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
+         "default": "",
+         "performance": "",
+         "balanced": "",
+         "power-saver": ""
       }
-    },
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} {icon}",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected 󰤭 ",
-        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-	"on-click": "~/.config/waybar/scripts/rofi_wifi.sh"
-    },
-    "pulseaudio": {
- 	"format": "{icon} {volume}%",
-	"format-bluetooth": "{icon} 󰂰 {volume}%",
-	"format-muted": "󰖁",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "tooltip": false,
-        "on-click": "pamixer --toggle-mute",
-        "on-click-right": "pavucontrol -t 3",
-        "on-click-middle": "blueman-manager",
-        "scroll-step": 5.0,
-	"smooth-scrolling-threshold": 1,
-	"reverse-scrolling": true
-    },
-    "pulseaudio#microphone": {
-        "format": "{format_source}",
-        "format-source": " {volume}%",
-        "format-source-muted": "",
-        "on-click": "pamixer --default-source -t",
-        "on-click-right": "pavucontrol -t 4",
-        "tooltip-format": "{source_desc} | {source_volume}%",
-        "scroll-step": 5.0,
-	"smooth-scrolling-threshold": 1,
-	"reverse-scrolling": true
-    },
-    "group/audio": {
-        "orientation": "inherit",
-        "drawer": {
-            "transition-duration": 500,
-            "children-class": "pulseaudio",
-            "transition-left-to-right": true
-        },
-        "modules": [
-            "pulseaudio",
-            "pulseaudio#microphone"
-        ]
-    },
-    "hyprland/workspaces": {
-        "format": "{name}",
-       "persistent-workspaces": {
-             "*": 4
-       }
-     },
-     "hyprland/window": {
-	"format": "{}",
-	"max-length": 60,
-	"separate-outputs": true,
-	"offscreen-css": true,
-	"offscreen-css-text": "(inactive)",
-	"rewrite": {
-		"(.*) — Mozilla Firefox": " $1",
-		"(.*) - fish": "> [$1]",
-		"(.*) - zsh": "> [$1]",
-		"(.*) - $term": "> [$1]"
-	}
-     },
-     "custom/power": {
-        "format": "⏻",
-        "on-click": "wlogout",
-	"tooltip": true,
-	"tooltip-format":"Logout Menu"
-    },
-    "mpris": {
-        "interval": 10,
-        "format": "{player_icon} <i>{dynamic}</i>",
-        "format-paused": "{status_icon} <i>{artist} {title}</i>",
-        "on-click": "playerctl play-pause",
-        "on-click-middle": "playerctl previous",
-        "on-click-right": "playerctl next",
-        "scroll-step": 5.0,
-        "smooth-scrolling-threshold": 1,
-        "tooltip": true,
-        "tooltip-format": "{status_icon} {dynamic}\nLeft Click: Pause\nMid Click: Previous\nRight Click: Next",
-        "player-icons": {
-                "chromium": "",
-                "default": "",
-                "firefox": "",
-                "kdeconnect": "",
-                "mopidy": "",
-                "mpv": "󰐹",
-                "spotify": "",
-                "vlc": "󰕼"
-        },
-        "status-icons": {
-                "paused": "󰐎",
-                "playing": "",
-                "stopped": ""
-        },
-        "dynamic-order": ["artist", "title"],
-        "max-length": 50
-    },
-    "custom/swaync": {
-	"tooltip": true,
-	"tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
-	"format": "{} {icon} ",
-	"format-icons": {
-		"notification": "<span foreground='red'><sup></sup></span>",
-		"none": "",
-		"dnd-notification": "<span foreground='red'><sup></sup></span>",
-		"dnd-none": "",
-		"inhibited-notification": "<span foreground='red'><sup></sup></span>",
-		"inhibited-none": "",
-		"dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-		"dnd-inhibited-none": ""
-	},
-	"return-type": "json",
-	"exec-if": "which swaync-client",
-	"exec": "swaync-client -swb",
-	"on-click": "sleep 0.1 && swaync-client -t -sw",
-	"on-click-right": "swaync-client -d -sw",
-	"escape": true
-    },
-    "group/notify": {
-	"orientation": "inherit",
-	"drawer": {
-		"transition-duration": 500,
-		"children-class": "custom/swaync",
-		"transition-left-to-right": false
-        },
-	"modules": [
-		"custom/swaync"
-	]
-     },
-     "group/miscellaneous": {
-	"orientation": "horizontal",
-	"modules": [
-            "battery",
-            "network",
-            "group/audio",
-            "power-profiles-daemon",
-	    "custom/power"
-	]
-     }
+   },
+   "network": {
+      // "interface": "wlp2*", // (Optional) To force the use of this interface
+      "format-wifi": "{essid} {icon}",
+      "format-ethernet": "{ipaddr}/{cidr} ",
+      "tooltip-format": "{ifname} via {gwaddr}  ({signalStrength}%)",
+      "format-linked": "{ifname} (No IP) ",
+      "format-disconnected": "Disconnected 󰤭 ",
+      "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+      "on-click": "~/.config/waybar/scripts/rofi_wifi.sh"
+   },
+   "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-bluetooth": "{icon} 󰂰 {volume}%",
+      "format-muted": "󰖁",
+      "format-icons": {
+         "headphone": "",
+         "hands-free": "",
+         "headset": "",
+         "phone": "",
+         "portable": "",
+         "car": "",
+         "default": ["", "", ""]
+      },
+      "tooltip": false,
+      "on-click": "pamixer --toggle-mute",
+      "on-click-right": "pavucontrol -t 3",
+      "on-click-middle": "blueman-manager",
+      "scroll-step": 5.0,
+      "smooth-scrolling-threshold": 1,
+      "reverse-scrolling": true
+   },
+   "pulseaudio#microphone": {
+      "format": "{format_source}",
+      "format-source": " {volume}%",
+      "format-source-muted": "",
+      "on-click": "pamixer --default-source -t",
+      "on-click-right": "pavucontrol -t 4",
+      "tooltip-format": "{source_desc} | {source_volume}%",
+      "scroll-step": 5.0,
+      "smooth-scrolling-threshold": 1,
+      "reverse-scrolling": true
+   },
+   "group/audio": {
+      "orientation": "inherit",
+      "drawer": {
+         "transition-duration": 500,
+         "children-class": "pulseaudio",
+         "transition-left-to-right": true
+      },
+      "modules": [
+         "pulseaudio",
+         "pulseaudio#microphone"
+      ]
+   },
+   "hyprland/workspaces": {
+      "format": "{name}",
+      "persistent-workspaces": {
+         "*": 4
+      }
+   },
+   "hyprland/window": {
+      "format": "{}",
+      "max-length": 60,
+      "separate-outputs": true,
+      "offscreen-css": true,
+      "offscreen-css-text": "(inactive)",
+      "rewrite": {
+         "(.*) — Mozilla Firefox": " $1",
+         "(.*) - fish": "> [$1]",
+         "(.*) - zsh": "> [$1]",
+         "(.*) - $term": "> [$1]"
+      }
+   },
+   "custom/power": {
+      "format": "⏻",
+      "on-click": "wlogout",
+      "tooltip": true,
+      "tooltip-format":"Logout Menu"
+   },
+   "mpris": {
+      "interval": 10,
+      "format": "{player_icon} <i>{dynamic}</i>",
+      "format-paused": "{status_icon} <i>{artist} {title}</i>",
+      "on-click": "playerctl play-pause",
+      "on-click-middle": "playerctl previous",
+      "on-click-right": "playerctl next",
+      "scroll-step": 5.0,
+      "smooth-scrolling-threshold": 1,
+      "tooltip": true,
+      "tooltip-format": "{status_icon} {dynamic}\nLeft Click: Pause\nMid Click: Previous\nRight Click: Next",
+      "player-icons": {
+         "chromium": "",
+         "default": "",
+         "firefox": "",
+         "kdeconnect": "",
+         "mopidy": "",
+         "mpv": "󰐹",
+         "spotify": "",
+         "vlc": "󰕼"
+      },
+      "status-icons": {
+         "paused": "󰐎",
+         "playing": "",
+         "stopped": ""
+      },
+      "dynamic-order": ["artist", "title"],
+      "max-length": 50
+   },
+   "custom/swaync": {
+      "tooltip": true,
+      "tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
+      "format": "{} {icon} ",
+      "format-icons": {
+         "notification": "<span foreground='red'><sup></sup></span>",
+         "none": "",
+         "dnd-notification": "<span foreground='red'><sup></sup></span>",
+         "dnd-none": "",
+         "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+         "inhibited-none": "",
+         "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+         "dnd-inhibited-none": ""
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "sleep 0.1 && swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+   },
+   "group/notify": {
+      "orientation": "inherit",
+      "drawer": {
+         "transition-duration": 500,
+         "children-class": "custom/swaync",
+         "transition-left-to-right": false
+      },
+      "modules": [
+         "custom/swaync"
+      ]
+   },
+   "group/miscellaneous": {
+      "orientation": "horizontal",
+      "modules": [
+         "battery",
+         "network",
+         "group/audio",
+         "power-profiles-daemon",
+         "custom/power"
+      ]
+   }
 }

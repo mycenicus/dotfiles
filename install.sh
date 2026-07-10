@@ -102,6 +102,10 @@ if [[ "$INSTALL_MISC" == true ]]; then
       mpv
 fi
 
+if [[ "${STOW}" == true ]]; then
+   sudo pacman -S --needed --noconfirm stow
+fi
+
 step "Installing yay (AUR helper)"
 if ! command -v yay &>/dev/null; then
    sudo pacman -S --needed --noconfirm git base-devel
@@ -146,11 +150,13 @@ fi
 if [[ "${STOW}" == false ]]; then
    step "Copying dotfiles"
    mkdir -p "${HOME}/.config"
+   mkdir -p "${HOME}/.icons"
+   mkdir -p "${HOME}/.vim"
    cp -rf .vimrc "${HOME}/"
    cp -rf .zshrc "${HOME}/"
    cp -rf .config/* "${HOME}/.config/"
-   cp -rf .icons/* "${HOME}"
-   cp -rf .vim/* "${HOME}/"
+   cp -rf .icons/* "${HOME}/.icons/"
+   cp -rf .vim/* "${HOME}/.vim/"
 else
    step "Skipping dotfiles copy."
 fi
@@ -193,5 +199,5 @@ echo -e "Set your wallpaper in hyprpaper \033[1;34m(~/.config/hypr/hyprpaper.con
 echo -e "And in hyprlock \033[1;34m(~/.config/hypr/hyprlock.conf)\033[0m"
 
 if [[ "${STOW}" == true ]]; then
-   echo -e "Run \e[1;36mstow -t ~ .\e[0m to create symlinks"
+   stow -t ~ .
 fi

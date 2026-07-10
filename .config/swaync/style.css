@@ -7,7 +7,7 @@
 }
 :root {
   --cc-bg: @surface_container_low;
-  --cc-bg-alpha: 0.6;
+  --cc-bg-alpha: 0.8;
   --noti-border-color: @outline;
   --noti-bg: @surface_container;
   --noti-bg-alpha: 0.8;
