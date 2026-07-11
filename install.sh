@@ -120,7 +120,8 @@ fi
 step "Installing yay packages"
 yay -S --noconfirm --needed \
    matugen-bin \
-   wlogout
+   wlogout \
+   bookokrat-bin # See https://sw.kovidgoyal.net/kitty/integrations/#image-and-document-viewers
 
 # Remove dolphin with all the KDE dependencies and wofi (both installed via archinstall)
 step "Removing KDE, Wofi packages"

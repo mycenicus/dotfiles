@@ -48,6 +48,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias ls='ls --color'
+alias icat='kitten icat'
 
 # Shell integrations
 eval "$(fzf --zsh)"

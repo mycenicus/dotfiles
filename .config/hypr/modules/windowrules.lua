@@ -81,6 +81,10 @@ hl.window_rule({
    size = {"(monitor_w*0.7)", "(monitor_h*0.6)"},
    center = true,
 })
+hl.window_rule({
+   match = { class = "firefox" },
+   no_blur = true,
+})
 
 ---------------------
 ---- LAYER RULES ----
@@ -99,5 +103,10 @@ hl.layer_rule({
 })
 hl.layer_rule({
    match = { namespace = "waybar" },
+   blur = false,
    ignore_alpha = 0.5,
+})
+hl.layer_rule({
+   match = { namespace = "logout_dialog" },
+   blur = true,
 })
