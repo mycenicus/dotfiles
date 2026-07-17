@@ -107,6 +107,11 @@ hl.layer_rule({
    ignore_alpha = 0.5,
 })
 hl.layer_rule({
+   match = { namespace = "rofi" },
+   dim_around = true,
+   animation = "popin 20%"
+})
+hl.layer_rule({
    match = { namespace = "logout_dialog" },
    blur = true,
 })

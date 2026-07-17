@@ -28,11 +28,11 @@
          "weeks-pos": "",
          "on-scroll": 1,
          "format": {
-            "months": "<span color='#ffead3'><b>{}</b></span>",
-            "days": "<span color='#ecc6d9'><b>{}</b></span>",
+            "months": "<span color='#ff6699'><b>{}</b></span>",
+            "days": "<span color='#cdd6f4'><b>{}</b></span>",
             "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
-            "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-            "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            "weekdays": "<span color='#7cd37c'><b>{}</b></span>",
+            "today": "<span color='#ffcc66'><b>{}</b></span>"
          }
       }
    },
@@ -66,11 +66,38 @@
       // "interface": "wlp2*", // (Optional) To force the use of this interface
       "format-wifi": "{essid} {icon}",
       "format-ethernet": "{ipaddr}/{cidr} ",
-      "tooltip-format": "{ifname} via {gwaddr}  ({signalStrength}%)",
-      "format-linked": "{ifname} (No IP) ",
+      "format-linked": "{ifname} (No IP) 󱘖 ",
       "format-disconnected": "Disconnected 󰤭 ",
+      "format-disabled": "󰤮",
       "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-      "on-click": "~/.config/waybar/scripts/rofi_wifi.sh"
+      "tooltip-format": "{ifname} via {gwaddr}  ({signalStrength}%)",
+      "tooltip-format-disconnected": "No Connection",
+      "tooltip-format-disabled": "Wi-Fi is OFF",
+      "tooltip-format-wifi": "󱄙  {essid} ({signalStrength}%)\n\n󰐻  Freq: {frequency}GHz\n  {bandwidthDownBytes}   {bandwidthUpBytes}",
+      "tooltip-format-ethernet": "󰈀  {ifname} (Connected)\n  {bandwidthDownBytes}   {bandwidthUpBytes}",
+      "tooltip-format-linked": "󱘖 {ifname}: No IP Address",
+      "on-click": "~/.config/waybar/scripts/wifi.sh"
+   },
+   "bluetooth": {
+      "format": "",
+      "format-connected": "󰂱 {device_alias}",
+      "format-disabled": "󰂲",
+      "tooltip-format": "{controller_alias} {status}",
+      "tooltip-format-connected": "󰐻  {num_connections} Connected:\n{device_enumerate}",
+      "tooltip-format-enumerate-connected-battery": "󰂱  {device_alias} (󰥈 {device_battery_percentage}%)",
+      "on-click": "blueman-manager",
+      "on-click-right": "rfkill toggle bluetooth"
+   },
+   "group/connections": {
+      "orientation": "horizontal",
+      "drawer": {
+         "transition-duration": 500,
+         "transition-left-to-right": true
+      },
+      "modules": [
+         "network",
+         "bluetooth"
+      ]
    },
    "pulseaudio": {
       "format": "{icon} {volume}%",
@@ -107,7 +134,7 @@
    "group/audio": {
       "orientation": "inherit",
       "drawer": {
-         "transition-duration": 500,
+         "transition-duration": 650,
          "children-class": "pulseaudio",
          "transition-left-to-right": true
       },
@@ -120,19 +147,20 @@
       "format": "{name}",
       "persistent-workspaces": {
          "*": 4
-      }
+      },
+      "enable-bar-scroll": true,
+      "on-scroll-up": "hyprctl dispatch workspace +1",
+      "on-scroll-down": "hyprctl dispatch workspace -1"
    },
    "hyprland/window": {
       "format": "{}",
       "max-length": 60,
       "separate-outputs": true,
-      "offscreen-css": true,
-      "offscreen-css-text": "(inactive)",
       "rewrite": {
          "(.*) — Mozilla Firefox": " $1",
-         "(.*) - fish": "> [$1]",
-         "(.*) - zsh": "> [$1]",
-         "(.*) - $term": "> [$1]"
+         "(.*) - zsh": "󰆍 [$1]",
+         "(.*) - $term": "󰆍 [$1]",
+         "(.*) - VIM": "󰆍 $1 - VIM"
       }
    },
    "custom/power": {
@@ -187,7 +215,7 @@
       "return-type": "json",
       "exec-if": "which swaync-client",
       "exec": "swaync-client -swb",
-      "on-click": "sleep 0.1 && swaync-client -t -sw",
+      "on-click": "swaync-client -t -sw",
       "on-click-right": "swaync-client -d -sw",
       "escape": true
    },
@@ -206,7 +234,7 @@
       "orientation": "horizontal",
       "modules": [
          "battery",
-         "network",
+         "group/connections",
          "group/audio",
          "power-profiles-daemon",
          "custom/power"
