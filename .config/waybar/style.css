@@ -65,7 +65,7 @@ button:hover {
 
 #taskbar button,
 #workspaces button {
-   color: @outline;
+   color: @inverse_outline;
    box-shadow: none;
    text-shadow: none;
    padding: 0 5px;
@@ -92,6 +92,10 @@ button:hover {
 
 #workspaces button.persistent{
    border-radius: 10px;
+}
+
+#workspaces button.empty{
+   color: @outline;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
