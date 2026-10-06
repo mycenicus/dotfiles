@@ -3,6 +3,14 @@ set = false
 command = "hyprpaper"
 arguments = ["img", "--transition-type", "center"]
 
+[templates.hyprpaper]
+input_path = '~/.config/matugen/templates/hyprpaper.conf'
+output_path = '~/.config/hypr/hyprpaper.conf'
+post_hook = 'pkill hyprpaper; hyprpaper &'
+
+[templates.hyprlock]
+input_path = '~/.config/matugen/templates/hyprlock.conf'
+output_path = '~/.config/hypr/colors.conf'
 
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland-colors.lua'
