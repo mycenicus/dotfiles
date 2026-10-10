@@ -1,14 +1,12 @@
 vim.pack.add({
    { src = 'https://github.com/saghen/blink.lib' },
-   { src = 'https://github.com/saghen/blink.cmp',         branch = "main" },
+   { src = 'https://github.com/saghen/blink.cmp', branch = 'main' },
    { src = 'https://github.com/xzbdmw/colorful-menu.nvim' },
+   { src = 'https://github.com/mikavilpas/blink-ripgrep.nvim' },
 })
 
 require('colorful-menu').setup()
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
-vim.lsp.config("*", { capabilities = capabilities })
+require('blink-ripgrep').setup()
 
 local cmp = require('blink.cmp')
 cmp.build():pwait()
@@ -36,7 +34,7 @@ cmp.setup({
       menu = {
          auto_show = false,
          draw = {
-            columns = { { "label" }, { "kind_icon", "kind", gap = 1 } },
+            columns = { { 'label' }, { 'kind_icon', 'kind', gap = 1 } },
             components = {
                kind_icon = {
                   text = function(ctx)
@@ -58,23 +56,23 @@ cmp.setup({
                },
                label = {
                   text = function(ctx)
-                     return require("colorful-menu").blink_components_text(ctx)
+                     return require('colorful-menu').blink_components_text(ctx)
                   end,
                   highlight = function(ctx)
-                     return require("colorful-menu").blink_components_highlight(ctx)
+                     return require('colorful-menu').blink_components_highlight(ctx)
                   end,
-               }
-            }
+               },
+            },
          },
       },
       documentation = { auto_show = false },
       ghost_text = { enabled = true, show_with_menu = true },
-      accept = { auto_brackets = { enabled = true }, },
+      accept = { auto_brackets = { enabled = true } },
    },
    cmdline = {
       enabled = true,
       keymap = {
-         preset = "cmdline",
+         preset = 'cmdline',
          ['<Tab>'] = { 'accept_and_enter' },
       },
       completion = {
@@ -83,16 +81,30 @@ cmp.setup({
             -- popup when writing :w :b etc.
             auto_show = function(_, _)
                return vim.fn.getcmdpos() > 3
-            end
-         }
+            end,
+         },
       },
    },
    signature = {
       enabled = true,
    },
 
-   sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
-   appearance = { use_nvim_cmp_as_default = false, nerd_font_variant = "mono" },
+   sources = {
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep' },
+      providers = {
+         ripgrep = {
+            module = 'blink-ripgrep',
+            name = 'Ripgrep',
+            opts = {
+               prefix_min_len = 3,
+               backend = {
+                  use = 'gitgrep-or-ripgrep',
+               },
+            },
+         },
+      },
+   },
+   appearance = { use_nvim_cmp_as_default = false, nerd_font_variant = 'mono' },
 
-   fuzzy = { implementation = "rust" } -- Requires last toolchain, i.e. rustup
+   fuzzy = { implementation = 'rust' }, -- Requires last toolchain, i.e. rustup
 })

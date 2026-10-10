@@ -33,19 +33,4 @@ vim.keymap.set('n', 'J', "m`J``",
    { silent = true, desc = "Join, keep cursor" })
 vim.keymap.set('n', 'gp', "m`p``j",
    { silent = true, desc = "Paste, keep cursor's column" })
-
--- Diagnostics
-vim.keymap.set('n', '<leader>dt', function()
-   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, { silent = true, desc = "Toggle diagnostics" })
-
-vim.keymap.set('n', '<leader>dq', function()
-   vim.diagnostic.setqflist()
-   vim.cmd("copen")
-end, { silent = true, desc = "Open diagnostics in quickfix list." })
-
-vim.keymap.set('n', 'gl', vim.diagnostic.open_float,
-   { desc = "Open diagnostic under cursor in a floating window" })
-
-
 -- <C-a> to increment, <C-x> to decrement number

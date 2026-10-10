@@ -1,10 +1,10 @@
 vim.pack.add({
-   { src = 'https://github.com/nvim-lualine/lualine.nvim' }
+   { src = 'https://github.com/nvim-lualine/lualine.nvim' },
 })
 
 local branch = { 'branch', icon = { '', color = { fg = '#A6D4DE' } } }
 
-require('lualine').setup {
+require('lualine').setup({
    options = {
       icons_enabled = true,
       theme = 'auto',
@@ -27,7 +27,7 @@ require('lualine').setup {
             'CursorMovedI',
             'ModeChanged',
          },
-      }
+      },
    },
    sections = {
       lualine_a = { 'mode' },
@@ -35,10 +35,10 @@ require('lualine').setup {
       lualine_c = { 'filename', 'diff', 'diagnostics' },
       lualine_x = { 'filetype' },
       lualine_y = { 'progress' },
-      lualine_z = { 'location' }
+      lualine_z = { 'location' },
    },
    inactive_sections = {
       lualine_c = { 'filename' },
       lualine_x = { 'location' },
    },
-}
+})
