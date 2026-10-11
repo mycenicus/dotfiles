@@ -71,3 +71,6 @@ require('mini.indentscope').setup({
 --    d
 -- }
 require('mini.splitjoin').setup()
+
+-- Move selected text with <A-j> <A-k> etc.
+require('mini.move').setup()

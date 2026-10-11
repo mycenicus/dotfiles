@@ -68,6 +68,7 @@ vim.keymap.set('n', '<leader>dq', function()
 end, { silent = true, desc = 'Open diagnostics in quickfix list.' })
 
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = 'Open diagnostic under cursor in a floating window' })
+
 vim.keymap.set('n', 'gh', function()
    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = 'Toggle inlay hint' })

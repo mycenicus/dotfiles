@@ -16,12 +16,15 @@ require('plugins.conform')
 require('plugins.lint')
 require('plugins.treesitter')
 require('plugins.spider')
+require('plugins.toggleterm')
 -- TODO: blink.pairs, blink.indent, fff.nvim
 -- TODO: edgy, trouble
--- TODO: snippets
+-- TODO: neopyter, pyrepl.nvim
+-- TODO: compile-mode.nvim
 
 vim.pack.add({
    { src = 'https://github.com/tpope/vim-sleuth' },
+   { src = 'https://github.com/rafamadriz/friendly-snippets' },
 })
 
 vim.pack.add({

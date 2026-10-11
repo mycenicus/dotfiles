@@ -13,3 +13,14 @@ vim.keymap.set('o', 'r', function() require('flash').remote() end, { desc = 'Rem
 vim.keymap.set({ 'x', 'o' }, 'R', function() require('flash').treesitter_search() end, { desc = 'Remote treesitter' })
 vim.keymap.set('c', '<C-s>', function() require('flash').toggle() end, { desc = 'Toggle Flash Search' })
 -- stylua: ignore end
+vim.keymap.set('n', '<leader>r', function()
+   require('flash').jump({
+      action = function(match, state)
+         vim.api.nvim_win_call(match.win, function()
+            vim.api.nvim_win_set_cursor(match.win, match.pos)
+            vim.diagnostic.open_float()
+         end)
+         state:restore()
+      end,
+   })
+end, { desc = 'Remote show diagnostics' })

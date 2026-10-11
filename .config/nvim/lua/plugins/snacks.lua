@@ -12,7 +12,6 @@ snacks.setup({
    bigfile = { enabled = true },
    rename = { enabled = true },
    scratch = { enabled = true },
-   terminal = { enabled = true },
    -- TODO check out these plugins
    -- explorer = { enabled = true },
    -- scope = { enabled = true },
@@ -43,9 +42,13 @@ vim.keymap.set('n', '<leader>pk', function()
    snacks.picker.keymaps({ layout = 'ivy' })
 end, { desc = 'Picker: keymaps' })
 
-vim.keymap.set('n', '<leader>pb', function()
+vim.keymap.set('n', '<leader>pg', function()
    snacks.picker.git_branches({ layout = 'select' })
 end, { desc = 'Picker: git branch' })
+
+vim.keymap.set('n', '<leader>pb', function()
+   snacks.picker.buffers()
+end, { desc = 'Picker: buffers' })
 
 vim.keymap.set('n', '<leader>lg', function()
    snacks.lazygit()
@@ -67,13 +70,6 @@ end, { desc = 'New scratch buffer' })
 vim.keymap.set('n', '<leader>s', function()
    snacks.scratch.select()
 end, { desc = 'Picker: scratch' })
-
--- Opens a terminal
--- 2<Esc> to go to normal mode
--- q to quit (in normal mode)
-vim.keymap.set('n', '<leader>tt', function()
-   snacks.terminal.toggle()
-end, { desc = 'Toggle terminal window' })
 
 require('todo-comments').setup()
 

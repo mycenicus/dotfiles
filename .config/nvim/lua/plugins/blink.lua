@@ -69,6 +69,7 @@ cmp.setup({
       ghost_text = { enabled = true, show_with_menu = true },
       accept = { auto_brackets = { enabled = true } },
    },
+
    cmdline = {
       enabled = true,
       keymap = {
@@ -88,6 +89,7 @@ cmp.setup({
    signature = {
       enabled = true,
    },
+   snippets = { preset = 'mini_snippets' },
 
    sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep' },
@@ -104,6 +106,7 @@ cmp.setup({
          },
       },
    },
+
    appearance = { use_nvim_cmp_as_default = false, nerd_font_variant = 'mono' },
 
    fuzzy = { implementation = 'rust' }, -- Requires last toolchain, i.e. rustup

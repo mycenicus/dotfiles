@@ -62,6 +62,17 @@ vim.api.nvim_create_autocmd('FileType', {
    end,
 })
 
+vim.api.nvim_create_autocmd('PackChanged', {
+   desc = 'Update Tree-sitter parsers after plugin updates',
+   group = vim.api.nvim_create_augroup('nvim_treesitter_update', { clear = true }),
+   callback = function(ev)
+      local name, kind = ev.data.spec.name, ev.data.kind
+      if name == 'nvim-treesitter' and (kind == 'install' or kind == 'update') then
+         vim.cmd('TSUpdate')
+      end
+   end,
+})
+
 require('nvim-treesitter-textobjects').setup({
    move = {
       set_jumps = true,
