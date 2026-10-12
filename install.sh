@@ -91,7 +91,9 @@ sudo pacman -S --needed --noconfirm \
    ripgrep \
    less \
    tmux \
-   lazygit
+   lazygit \
+   nvim \
+   tree-sitter-cli
 
 if [[ "$INSTALL_MISC" == true ]]; then
    sudo pacman -S --needed --noconfirm \

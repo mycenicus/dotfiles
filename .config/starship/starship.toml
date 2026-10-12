@@ -26,7 +26,7 @@ disabled=true
 
 [character]
 disabled=false
-success_symbol = "[❯](purple)"
+success_symbol = "[❯](fg:pink)"
 error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](green)"
 
@@ -271,3 +271,4 @@ base = "#1a1b26" # git branch bg
 mauve = "#cba6f7"
 teal = "#94e2d5"
 peach = "#fab387"
+pink = "#ff00af"

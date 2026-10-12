@@ -12,6 +12,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
       vim.api.nvim_set_hl(0, 'DimCursorLine', { bg = '#1c1c1c' })
       vim.api.nvim_set_hl(0, 'DimCursorLineNr', { fg = 'Yellow', bg = '#1c1c1c' })
       vim.api.nvim_set_hl(0, 'FoldLine', { fg = '#45475A' })
+      vim.api.nvim_set_hl(0, 'MatchParen', { bold = true, fg = '#ff00af' })
    end,
 })
 
