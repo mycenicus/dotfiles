@@ -33,6 +33,7 @@ cmp.setup({
    completion = {
       menu = {
          auto_show = false,
+         scrollbar = false,
          draw = {
             columns = { { 'label' }, { 'kind_icon', 'kind', gap = 1 } },
             components = {
