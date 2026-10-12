@@ -135,3 +135,16 @@ local spec = {
    },
 }
 statuscolumn.setup({ content = statuscolumn.gen_content.main(spec), dim_inactive = true })
+
+require('mini.operators').setup({
+   exchange = {
+      -- NOTE: Default `gx` is remapped to `gX`
+      prefix = 'gx',
+   },
+   sort = {
+      prefix = 'gs',
+   },
+   multiply = { prefix = '' },
+   replace = { prefix = '' },
+   evaluate = { prefix = '' },
+})

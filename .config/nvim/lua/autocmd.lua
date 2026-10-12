@@ -51,3 +51,10 @@ vim.api.nvim_create_autocmd('BufWritePre', {
       end
    end,
 })
+
+vim.api.nvim_create_autocmd('BufEnter', {
+   group = vim.api.nvim_create_augroup('center_on_enter', { clear = true }),
+   callback = function()
+      vim.cmd('normal! zz')
+   end,
+})
