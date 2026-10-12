@@ -17,6 +17,7 @@ require('plugins.lint')
 require('plugins.treesitter')
 require('plugins.spider')
 require('plugins.toggleterm')
+require('plugins.colorscheme')
 -- TODO: blink.pairs, blink.indent, fff.nvim
 -- TODO: edgy, trouble
 -- TODO: neopyter, pyrepl.nvim
@@ -26,18 +27,3 @@ vim.pack.add({
    { src = 'https://github.com/tpope/vim-sleuth' },
    { src = 'https://github.com/rafamadriz/friendly-snippets' },
 })
-
-vim.pack.add({
-   { src = 'https://github.com/bluz71/vim-moonfly-colors', name = 'moonfly' },
-})
-
-local custom_highlight = vim.api.nvim_create_augroup('CustomHighlight', {})
-vim.api.nvim_create_autocmd('ColorScheme', {
-   pattern = 'moonfly',
-   group = custom_highlight,
-   callback = function()
-      vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#696969' })
-   end,
-})
-
-vim.cmd.colorscheme('moonfly')

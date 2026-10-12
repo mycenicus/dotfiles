@@ -3,15 +3,17 @@ vim.pack.add({
 })
 
 require('flash').setup({
+   modes = { search = { enabled = true } },
    char = { jump_labels = true },
+   label = { after = { 0, 2 } },
+   style = 'overlay',
+   rainbow = { enabled = true, shade = 6 },
 })
 
 -- stylua: ignore start
-vim.keymap.set({ 'n', 'x', 'o' }, 's', function() require('flash').jump() end, { desc = 'Flash jump' })
-vim.keymap.set({ 'n', 'x', 'o' }, 'S', function() require('flash').treesitter() end, { desc = 'Flash treesitter' })
+vim.keymap.set({ 'n', 'x', 'o' }, 'f', function() require('flash').jump() end, { desc = 'Flash jump' })
 vim.keymap.set('o', 'r', function() require('flash').remote() end, { desc = 'Remote flash' })
-vim.keymap.set({ 'x', 'o' }, 'R', function() require('flash').treesitter_search() end, { desc = 'Remote treesitter' })
-vim.keymap.set('c', '<C-s>', function() require('flash').toggle() end, { desc = 'Toggle Flash Search' })
+vim.keymap.set({ 'x', 'o' }, 'R', function() require('flash').treesitter_search() end, { desc = 'Far-away treesitter' })
 -- stylua: ignore end
 vim.keymap.set('n', '<leader>r', function()
    require('flash').jump({
